@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 
 const { config } = require('./config');
 const args = process.argv.slice(2);
-console.log(con)
 let theurl = null;
 if (args.find(v => v.includes('url='))) {
     theurl = args.find(v => v.includes('url=')).replace('url=', '');
