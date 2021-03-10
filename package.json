@@ -1,0 +1,22 @@
+{
+  "name": "twitterscreenshot",
+  "version": "0.0.1",
+  "description": "A Node CLI tool to make a screenshot of a tweet and create a link",
+  "main": "gettweet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwsmart/TwitterScreenShot.git"
+  },
+  "author": "Dave Smart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwsmart/TwitterScreenShot/issues"
+  },
+  "homepage": "https://github.com/dwsmart/TwitterScreenShot#readme",
+  "dependencies": {
+    "puppeteer": "^8.0.0"
+  }
+}
