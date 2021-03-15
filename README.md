@@ -1,5 +1,7 @@
 # TwitterScreenShot
-A Node CLI tool to make a screenshot of a tweet and create a link
+A Node CLI tool to make a screenshot of a tweet and create a link. A twitter embed can add extra weight in JavaScript in a page, this allows you to create a static image of a tweet from its URL, and a link to it, which is much lighter.
+
+There are downsides though, with this being a static image, the number of likes and retweets are not updated (unless you ran the script again!), and commenting / retweet links are not interactive.
 
 ## Install
 Download the files from git, you can clone them, [see guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) or download the zip file (click the green code button and click Download Zip)
