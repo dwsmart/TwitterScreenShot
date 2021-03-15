@@ -5,7 +5,9 @@ There are downsides though, with this being a static image, the number of likes 
 
 ## Install
 Download the files from git, you can clone them, [see guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) or download the zip file (click the green code button and click Download Zip)
+
 run `npm install`
+
 copy `config.js.default` to `config.js` and amend to suit
 
 ## config
