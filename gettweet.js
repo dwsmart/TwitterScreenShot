@@ -35,7 +35,7 @@ if (!theurl) {
 <head>
 <meta charset='UTF-8'>
 </head>
-<body>
+<body style="background-color: ${config.background}">
     <blockquote class="twitter-tweet">
         <p lang="en" dir="ltr"></p>&mdash; <a href="${theurl}?ref_src=twsrc%5Etfw">March 8, 2021</a></blockquote>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

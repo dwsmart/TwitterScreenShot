@@ -9,7 +9,8 @@ amend config.js to suit
 ## config
 All configuration is done in the `config.js` file.
 
- * `imgDir` _default `tweetimg/`_ - The directory the screenshot of the tweet will be generated in, the filename will always be `{tweet_id}.png` 
+ * `imgDir` _default `tweetimg/`_ - The directory the screenshot of the tweet will be generated in, the filename will always be `{tweet_id}.png`
+ * `background` _default `#ffffff`_ - Background colour of the tweet snapshot.
  * `outputHtml` _default `true`_ - Allowed values are `true` and `false`. If true, the script will return html with a `<a>` link and `<img>` tag
  * `imgURL` _default `http://example.com/tweetimg/`_ - The url to prepend to the `src` attribute in the `<img>` tag
  * `classNames` _default `''`_ - a string of class names to add to the `class` attribute of the `<img>` tag
