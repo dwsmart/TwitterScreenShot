@@ -23,7 +23,7 @@ if (!theurl) {
         await page.setViewport({
             width: 1280,
             height: 3000,
-            deviceScaleFactor: 3
+            deviceScaleFactor: 2
         });
 
         let r = null
@@ -37,7 +37,7 @@ if (!theurl) {
 </head>
 <body style="background-color: ${config.background}">
     <blockquote class="twitter-tweet">
-        <p lang="en" dir="ltr"></p>&mdash; <a href="${theurl}?ref_src=twsrc%5Etfw">March 8, 2021</a></blockquote>
+        <p lang="en" dir="ltr"></p>&mdash; <a href="${theurl}?ref_src=twsrc%5Etfw"></a></blockquote>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>`;
