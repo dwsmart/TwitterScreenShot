@@ -2,12 +2,12 @@
 A Node CLI tool to make a screenshot of a tweet and create a link
 
 ## Install
-Download the files from git (clone or download the zip)
+Download the files from git, you can clone them, [see guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) or download the zip file (click the green code button and click Download Zip)
 run `npm install`
 amend config.js to suit
 
 ## config
-All configuration is done in the config.js file.
+All configuration is done in the `config.js` file.
 
  * `imgDir` _default `tweetimg/`_ - The directory the screenshot of the tweet will be generated in, the filename will always be `{tweet_id}.png` 
  * `outputHtml` _default `true`_ - Allowed values are `true` and `false`. If true, the script will return html with a `<a>` link and `<img>` tag
