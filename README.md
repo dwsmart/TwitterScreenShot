@@ -4,7 +4,7 @@ A Node CLI tool to make a screenshot of a tweet and create a link
 ## Install
 Download the files from git, you can clone them, [see guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) or download the zip file (click the green code button and click Download Zip)
 run `npm install`
-amend config.js to suit
+copy `config.js.default` to `config.js` and amend to suit
 
 ## config
 All configuration is done in the `config.js` file.

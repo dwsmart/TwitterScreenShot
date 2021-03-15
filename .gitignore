@@ -105,3 +105,4 @@ dist
 
 #tweet-imgs
 tweetimg/*.png
+config.js
