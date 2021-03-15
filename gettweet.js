@@ -58,15 +58,23 @@ if (!theurl) {
                 height: Math.min(bounding_box.height, page.viewport().height),
             },
         });
-        r = await page.goto(theurl, { timeout: 20000, waitUntil: 'networkidle0' }).catch(e => console.error(e));
+        if (config.outputHtml) {
+            r = await page.goto(theurl, { timeout: 20000, waitUntil: 'networkidle0' }).catch(e => console.error(e));
 
-        let alttext = await page.title();
-        const outputString = `
+            let alttext = await page.title();
+            let lazyload = '';
+            if (config.lazyload) {
+                lazyload = `loading="lazy" `;
+            }
+            const outputString = `
 
-<a href="${theurl}" target="_blank" rel="noopener"><img src="${config.imgURL}${fname}.png" loading="lazy" class="${config.classNames}" width="${bounding_box.width}" height="${bounding_box.height}" alt="${htmlEntities(alttext)}"/></a>
+<a href="${theurl}" target="_blank" rel="noopener"><img src="${config.imgURL}${fname}.png" ${lazyload}class="${config.classNames}" width="${bounding_box.width}" height="${bounding_box.height}" alt="${htmlEntities(alttext)}"/></a>
 
 `
-        console.log(outputString)
+            console.log(outputString);
+        } else {
+            console.log(`done`);
+        }
         browser.close();
     })();
 }
