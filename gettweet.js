@@ -1,5 +1,8 @@
 const puppeteer = require('puppeteer');
-
+const imagemin = require('imagemin');
+const imageminWebp = require('imagemin-webp');
+const imageminPngquant = require('imagemin-pngquant');
+const fs = require('fs');
 const { config } = require('./config');
 const args = process.argv.slice(2);
 let theurl = null;
@@ -50,7 +53,7 @@ if (!theurl) {
         const tweet = await page.$('div.twitter-tweet-rendered');
         const bounding_box = await tweet.boundingBox();
         await tweet.screenshot({
-            path: `${config.imgDir}${fname}.png`,
+            path: `${config.imgDir}unopt/${fname}.png`,
             clip: {
                 x: bounding_box.x,
                 y: bounding_box.y,
@@ -58,6 +61,27 @@ if (!theurl) {
                 height: Math.min(bounding_box.height, page.viewport().height),
             },
         });
+        (async() => {
+            const files = await imagemin([`${config.imgDir}/unopt/*.png`], {
+                destination: `${config.imgDir}`,
+                plugins: [
+                    imageminPngquant({
+                        quality: [0.6, 0.8]
+                    })
+                ]
+            });
+        })();
+        (async() => {
+            const files = await imagemin([`${config.imgDir}/unopt/*.png`], {
+                destination: `${config.imgDir}`,
+                plugins: [
+                    imageminWebp({ quality: 50 })
+                ]
+            });
+            fs.unlinkSync(`${config.imgDir}unopt/${fname}.png`);
+        })();
+
+
         if (config.outputHtml) {
             r = await page.goto(theurl, { timeout: 20000, waitUntil: 'networkidle0' }).catch(e => console.error(e));
 
@@ -67,8 +91,13 @@ if (!theurl) {
                 lazyload = `loading="lazy" `;
             }
             const outputString = `
-
-<a href="${theurl}" target="_blank" rel="noopener"><img src="${config.imgURL}${fname}.png" ${lazyload}class="${config.classNames}" width="${bounding_box.width}" height="${bounding_box.height}" alt="${htmlEntities(alttext)}"/></a>
+            
+            <a href="${theurl}" target="_blank" rel="noopener">
+            <picture>
+                <source type="image/webp" srcset="${config.imgURL}${fname}.webp">
+                <img src="${config.imgURL}${fname}.png" ${lazyload}class="${config.classNames}" width="${bounding_box.width}" height="${bounding_box.height}" alt="${htmlEntities(alttext)}"/>
+            </picture>
+            </a>
 
 `
             console.log(outputString);
