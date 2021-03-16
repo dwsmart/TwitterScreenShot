@@ -12,6 +12,13 @@ run `npm install`
 
 copy `config.js.default` to `config.js` and amend to suit
 
+Whatever folder you specify for `imgDir` needs to exist, and also needs contain a further folder called named `unopt`:
+
+```
+tweetimg/
+|__unopt/
+```
+
 ## config
 All configuration is done in the `config.js` file.
 
