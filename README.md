@@ -22,15 +22,23 @@ tweetimg/
 ## config
 All configuration is done in the `config.js` file.
 
- * `imgDir` _default `tweetimg/`_ - The directory the screenshot of the tweet will be generated in, the filenames will always be `{tweet_id}.png` & `{tweet_id}.webp`
+ * `imgDir` _default `tweetimg/`_ - The directory the screenshot of the tweet will be generated in, the filenames will always be `{tweet_id}.png` & `{tweet_id}.webp`.
+ * `lightDark` _default `light`_ - Set to `dark` to create snapshot in twitter's dark mode.
  * `background` _default `#ffffff`_ - Background colour of the tweet snapshot.
- * `outputHtml` _default `true`_ - Allowed values are `true` and `false`. If true, the script will return html with a `<a>` link and `<picture> <img>` tag
- * `imgURL` _default `http://example.com/tweetimg/`_ - The url to prepend to the `src` attribute in the `<img>` tag
- * `classNames` _default `''`_ - a string of class names to add to the `class` attribute of the `<img>` tag
- * `lazyload` _default `true`_ - Allowed values are `true` and `false`. If true, the script will add `lazyload="true"` to the `<img>` tag
+ * `outputHtml` _default `true`_ - Allowed values are `true` and `false`. If true, the script will return html with a `<a>` link and `<picture> <img>` tag.
+ * `imgURL` _default `http://example.com/tweetimg/`_ - The url to prepend to the `src` attribute in the `<img>` tag.
+ * `classNames` _default `''`_ - a string of class names to add to the `class` attribute of the `<img>` tag.
+ * `lazyload` _default `true`_ - Allowed values are `true` and `false`. If true, the script will add `lazyload="true"` to the `<img>` tag.
 
 ## Usage
-`node gettweet url={tweet_url here}`
+`node gettweet url={tweet_url here} bg={valid color} --dark|--light --nothread`
+
+* `url` - _Required_ - The url of the tweet, copy this from the browser bar
+* `bg` - _Optional_ - override the page background colour set in `./config.js`.
+* `--dark` - _Optional_ - force dark mode, overrides the setting in `./config.js`.
+* `--light` - _Optional_ - force light mode, overrides the setting in `./config.js`.
+* `--nothread` - _Optional_ - show just the individual tweet, not the conversation.
+
 
 ### example:
 `node gettweet url=https://twitter.com/davewsmart/status/1364211090968707072`

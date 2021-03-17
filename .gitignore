@@ -105,6 +105,7 @@ dist
 
 #tweet-imgs
 tweetimg/*.png
+tweetimg/*.webp
 tweetimg/unopt/*.png
 config.js
 package-lock.json
