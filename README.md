@@ -6,6 +6,12 @@ The script creates a .png and a .webp of the image, and returns the html for the
 There are downsides though, with this being a static image, the number of likes and retweets are not updated (unless you ran the script again!), and commenting / retweet links are not interactive.
 
 ## Install
+
+NPM:
+`npm i twitterscreenshot`
+
+or:
+
 Download the files from git, you can clone them, [see guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) or download the zip file (click the green code button and click Download Zip)
 
 run `npm install`
