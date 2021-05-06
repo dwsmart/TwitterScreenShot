@@ -8,4 +8,4 @@ const config = {
     lazyload: true, // add loading="lazy" to the outputted <img>
 }
 
-module.exports = { config }
+export default config;

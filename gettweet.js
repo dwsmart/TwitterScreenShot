@@ -1,9 +1,9 @@
-const puppeteer = require('puppeteer');
-const imagemin = require('imagemin');
-const imageminWebp = require('imagemin-webp');
-const imageminPngquant = require('imagemin-pngquant');
-const fs = require('fs');
-const { config } = require('./config');
+import puppeteer from 'puppeteer';
+import imagemin from 'imagemin';
+import imageminWebp from 'imagemin-webp';
+import imageminPngquant from 'imagemin-pngquant';
+import fs from 'fs';
+import config from './config.js';
 
 const imgDir = config.imgDir || 'tweetimg/';
 const outputHtml = config.outputHtml || true;
