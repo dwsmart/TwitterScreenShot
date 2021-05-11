@@ -52,3 +52,8 @@ All configuration is done in the `config.js` file.
     </picture>
 </a>
 ```
+
+## Some Great Alternatives
+Use Hugo as a CMS? [John Muller](https://johnmu.com/tweet-screenshot-embeds/) has an excellent integrated solution [static-social-posts on github](https://github.com/softplus/static-social-posts)
+
+Perhaps prefer an SVG? Try Terence Eden's ([@edent](https://twitter.com/edent)) [Tweet2SVG on gitlab](https://gitlab.com/edent/tweet2svg), a php driven solution.
