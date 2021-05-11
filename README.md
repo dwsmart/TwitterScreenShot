@@ -54,6 +54,6 @@ All configuration is done in the `config.js` file.
 ```
 
 ## Some Great Alternatives
-Use Hugo as a CMS? John Muller [@JohnMu on twitter](https://twitter.com/JohnMu) has an excellent integrated solution [static-social-posts on github](https://github.com/softplus/static-social-posts) & [more info on his blog post](https://johnmu.com/tweet-screenshot-embeds/)
+Use Hugo as a CMS? John Muller ([@JohnMu on twitter](https://twitter.com/JohnMu)) has an excellent integrated solution [static-social-posts on github](https://github.com/softplus/static-social-posts) & [more info on his blog post](https://johnmu.com/tweet-screenshot-embeds/)
 
 Perhaps prefer an SVG? Try Terence Eden's ([@edent on twitter](https://twitter.com/edent)) [Tweet2SVG on gitlab](https://gitlab.com/edent/tweet2svg), a php driven solution.
