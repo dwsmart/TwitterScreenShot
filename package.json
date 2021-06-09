@@ -1,6 +1,6 @@
 {
     "name": "twitterscreenshot",
-    "version": "0.0.8",
+    "version": "0.0.10",
     "description": "A Node CLI tool to make a screenshot of a tweet and create a link",
     "main": "gettweet.js",
     "type": "module",
@@ -21,7 +21,7 @@
         "imagemin": "^8.0.0",
         "imagemin-pngquant": "^9.0.2",
         "imagemin-webp": "^6.0.0",
-        "puppeteer": "^9.1.1"
+        "puppeteer": "^10.0.0"
     },
     "devDependencies": {}
 }

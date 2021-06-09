@@ -46,7 +46,7 @@ if (!theurl) {
     console.log('url= is required');
 } else {
     (async() => {
-        const browser = await puppeteer.launch()
+        const browser = await puppeteer.launch({headless: false})
         const page = await browser.newPage()
 
         await page.setViewport({
@@ -63,6 +63,12 @@ if (!theurl) {
 <html>
 <head>
 <meta charset='UTF-8'>
+<style>
+#twitter-widget-0 { 
+    width: 100% !important; 
+    height: 1000rem !important;
+  }
+  </style>
 </head>
 <body style="background-color: ${background}">
     <blockquote class="twitter-tweet"${mode}${hideThread}>
@@ -76,7 +82,9 @@ if (!theurl) {
 
         await page.waitForSelector('iframe#twitter-widget-0');
         await page.waitForTimeout(3000);
-        const tweet = await page.$('div.twitter-tweet-rendered');
+        const tweetframe = await page.$('iframe#twitter-widget-0');
+        const frame = await tweetframe.contentFrame();
+        const tweet = await frame.$('div#app');
         const bounding_box = await tweet.boundingBox();
         await tweet.screenshot({
             path: `${imgDir}unopt/${fname}.png`,
