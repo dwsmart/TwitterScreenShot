@@ -18,10 +18,10 @@
     },
     "homepage": "https://github.com/dwsmart/TwitterScreenShot#readme",
     "dependencies": {
-        "imagemin": "^8.0.0",
+        "imagemin": "^8.0.1",
         "imagemin-pngquant": "^9.0.2",
         "imagemin-webp": "^6.0.0",
-        "puppeteer": "^10.1.0"
+        "puppeteer": "^10.2.0"
     },
     "devDependencies": {}
 }
