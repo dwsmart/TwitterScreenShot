@@ -21,6 +21,6 @@
         "imagemin": "^8.0.1",
         "imagemin-pngquant": "^9.0.2",
         "imagemin-webp": "^7.0.0",
-        "puppeteer": "^13.4.0"
+        "puppeteer": "^13.5.1"
     }
 }
