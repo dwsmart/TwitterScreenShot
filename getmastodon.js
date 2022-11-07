@@ -65,9 +65,10 @@ if (!theurl) {
 </html>`;
         page.setContent(theFile);
         await page.waitForSelector('iframe.mastodon-embed');
-        await new Promise(r => setTimeout(r, 3000));
+        await new Promise(r => setTimeout(r, 5000));
         const tweetframe = await page.$('iframe.mastodon-embed');
         const frame = await tweetframe.contentFrame();
+        
         await frame.waitForSelector('div.activity-stream');
        
         const tweet = await frame.$('div.activity-stream');
