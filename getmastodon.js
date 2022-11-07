@@ -1,45 +1,32 @@
 import puppeteer from 'puppeteer';
+import fetch from 'node-fetch';
 import imagemin from 'imagemin';
 import imageminWebp from 'imagemin-webp';
 import imageminPngquant from 'imagemin-pngquant';
+import { stripHtml } from "string-strip-html";
 import fs from 'fs';
 import config from './config.js';
 
 const imgDir = config.imgDir || 'tweetimg/';
 const outputHtml = config.outputHtml || true;
-let lightDark = config.lightDark || '';
 let background = config.background || '#ffffff';
 const imgURL = config.imgURL || 'https://example.com/tweetimg/';
 const classNames = config.classNames || '';
 const lazyload = config.lazyload || true;
-let hideThread = '';
+
 let theurl = null;
-let mode = '';
+
 
 const args = process.argv.slice(2);
 
-if (lightDark.toLowerCase() === 'dark') {
-    mode = ' data-theme="dark"';
-}
+
+
 
 if (args.find(v => v.includes('url='))) {
     theurl = args.find(v => v.includes('url=')).replace('url=', '');
 }
 if (args.find(v => v.includes('bg='))) {
     background = args.find(v => v.includes('bg=')).replace('bg=', '');
-}
-if (args.find(v => v.includes('--dark'))) {
-    mode = ' data-theme="dark"';
-}
-if (args.find(v => v.includes('--light'))) {
-    mode = '';
-}
-if (args.find(v => v.includes('--nothread'))) {
-    hideThread = ' data-conversation="none"';
-}
-
-function htmlEntities(str) {
-    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 if (!theurl) {
@@ -57,32 +44,33 @@ if (!theurl) {
 
         let r = null;
         let uParts = theurl.split('/');
-        let fname = uParts.pop();
+        let finalURL = theurl;
+        let server = `${uParts[0]}//${uParts[2]}`;
+        if ((uParts[4].match(/@/g) || []).length > 1) {
+            server = `${uParts[0]}//${uParts[4].split('@')[2]}`;
+            finalURL = `${server}/web/@${uParts[4].split('@')[1]}/${uParts[5]}`;
+        }
+        const id = uParts.pop();
+        const fname = server.replace('https://','').replace(/\./g, '_') + '_' + id;
         const theFile = `
 <!doctype html>
 <html>
 <head>
 <meta charset='UTF-8'>
-<style>
-#twitter-widget-0 { 
-    width: 100% !important; 
-    height: 1000rem !important;
-  }
-  </style>
 </head>
 <body style="background-color: ${background}">
-    <blockquote class="twitter-tweet"${mode}${hideThread}>
-        <p lang="en" dir="ltr"></p>&mdash; <a href="${theurl}?ref_src=twsrc%5Etfw"></a></blockquote>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</body>
+    <iframe src="${finalURL.replace('web/', '')}/embed" class="mastodon-embed" style="max-width: 100%; border: 0" width="400" allowfullscreen="allowfullscreen"></iframe>
+    <script src="${server}/embed.js" async="async"></script>
+    </body>
 </html>`;
         page.setContent(theFile);
-
-        await page.waitForSelector('iframe#twitter-widget-0');
+        await page.waitForSelector('iframe.mastodon-embed');
         await new Promise(r => setTimeout(r, 3000));
-        const tweetframe = await page.$('iframe#twitter-widget-0');
+        const tweetframe = await page.$('iframe.mastodon-embed');
         const frame = await tweetframe.contentFrame();
-        const tweet = await frame.$('div#app');
+        await frame.waitForSelector('div.activity-stream');
+       
+        const tweet = await frame.$('div.activity-stream');
         const bounding_box = await tweet.boundingBox();
         await tweet.screenshot({
             path: `${imgDir}unopt/${fname}.png`,
@@ -115,9 +103,8 @@ if (!theurl) {
 
 
         if (outputHtml) {
-            r = await page.goto(theurl, { timeout: 20000, waitUntil: 'networkidle0' }).catch(e => console.error(e));
-
-            let alttext = await page.title();
+            const apiResponse = await fetch(`${server}/api/v1/statuses/${id}`).then(response => response.json());
+            let alttext = stripHtml(apiResponse.content).result;
             let lazyloadString = '';
             if (lazyload) {
                 lazyloadString = `loading="lazy" `;
@@ -127,7 +114,7 @@ if (!theurl) {
             <a href="${theurl}" target="_blank" rel="noopener">
             <picture>
                 <source type="image/webp" srcset="${imgURL}${fname}.webp">
-                <img src="${imgURL}${fname}.png" ${lazyloadString}class="${classNames}" width="${bounding_box.width}" height="${bounding_box.height}" alt="${htmlEntities(alttext)}"/>
+                <img src="${imgURL}${fname}.png" ${lazyloadString}class="${classNames}" width="${bounding_box.width}" height="${bounding_box.height}" alt="${alttext}"/>
             </picture>
             </a>
 
