@@ -13,6 +13,11 @@ let background = config.background || '#ffffff';
 const imgURL = config.imgURL || 'https://example.com/tweetimg/';
 const classNames = config.classNames || '';
 const lazyload = config.lazyload || true;
+const isRounded = config.rounded || false;
+let rounded = '';
+if (isRounded) {
+    rounded = ' mastodon-rounded';
+}
 
 let theurl = null;
 
@@ -28,11 +33,16 @@ if (args.find(v => v.includes('url='))) {
 if (args.find(v => v.includes('bg='))) {
     background = args.find(v => v.includes('bg=')).replace('bg=', '');
 }
-
+if (args.find(v => v.includes('--rounded'))) {
+    rounded = ' mastodon-rounded';
+}
+if (args.find(v => v.includes('--square'))) {
+    rounded = '';
+}
 if (!theurl) {
     console.log('url= is required');
 } else {
-    (async() => {
+    (async () => {
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
 
@@ -51,15 +61,20 @@ if (!theurl) {
             finalURL = `${server}/web/@${uParts[4].split('@')[1]}/${uParts[5]}`;
         }
         const id = uParts.pop();
-        const fname = server.replace('https://','').replace(/\./g, '_') + '_' + id;
+        const fname = server.replace('https://', '').replace(/\./g, '_') + '_' + id;
         const theFile = `
 <!doctype html>
 <html>
 <head>
 <meta charset='UTF-8'>
+<style>
+.mastodon-rounded {
+    border-radius: 15px;
+}
+</style>
 </head>
 <body style="background-color: ${background}">
-    <iframe src="${finalURL.replace('web/', '')}/embed" class="mastodon-embed" style="max-width: 100%; border: 0" width="400" allowfullscreen="allowfullscreen"></iframe>
+    <iframe src="${finalURL.replace('web/', '')}/embed" class="mastodon-embed${rounded}" style="max-width: 100%; border: 0" width="400" allowfullscreen="allowfullscreen"></iframe>
     <script src="${server}/embed.js" async="async"></script>
     </body>
 </html>`;
@@ -68,9 +83,9 @@ if (!theurl) {
         await new Promise(r => setTimeout(r, 5000));
         const tootframe = await page.$('iframe.mastodon-embed');
         const frame = await tootframe.contentFrame();
-        
+
         await frame.waitForSelector('div.activity-stream');
-       
+
         const toot = await frame.$('div.activity-stream');
         const bounding_box = await toot.boundingBox();
         await toot.screenshot({
@@ -82,7 +97,7 @@ if (!theurl) {
                 height: Math.min(bounding_box.height, page.viewport().height),
             },
         });
-        (async() => {
+        (async () => {
             const files = await imagemin([`${imgDir}/unopt/*.png`], {
                 destination: `${imgDir}`,
                 plugins: [
@@ -92,7 +107,7 @@ if (!theurl) {
                 ]
             });
         })();
-        (async() => {
+        (async () => {
             const files = await imagemin([`${imgDir}/unopt/*.png`], {
                 destination: `${imgDir}`,
                 plugins: [

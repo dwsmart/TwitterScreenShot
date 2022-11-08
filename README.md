@@ -60,7 +60,9 @@ All configuration is done in the `config.js` file.
 `node getmastodon url={toot url here} bg={valid color}`
 
 * `url` - _Required_ - The url of the tweet, copy this from the browser bar
-* `bg` - _Optional_ - override the page background colour set in `./config.js`.
+* `bg` - _Optional_ - override the page background colour set in `./config.js` (only relevant if you set `--rounded`).
+* `--rounded` - _Optional_ - add a border radius to the embed, overrides the setting in `./config.js`.
+* `--square` - _Optional_ - enforces no border radius to the embed, overrides the setting in `./config.js`.
 
 ### example:
 `node getmastodon url=https://seocommunity.social/web/@dwsmart/109302205479552500`
