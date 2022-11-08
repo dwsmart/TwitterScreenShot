@@ -66,14 +66,14 @@ if (!theurl) {
         page.setContent(theFile);
         await page.waitForSelector('iframe.mastodon-embed');
         await new Promise(r => setTimeout(r, 5000));
-        const tweetframe = await page.$('iframe.mastodon-embed');
-        const frame = await tweetframe.contentFrame();
+        const tootframe = await page.$('iframe.mastodon-embed');
+        const frame = await tootframe.contentFrame();
         
         await frame.waitForSelector('div.activity-stream');
        
-        const tweet = await frame.$('div.activity-stream');
-        const bounding_box = await tweet.boundingBox();
-        await tweet.screenshot({
+        const toot = await frame.$('div.activity-stream');
+        const bounding_box = await toot.boundingBox();
+        await toot.screenshot({
             path: `${imgDir}unopt/${fname}.png`,
             clip: {
                 x: bounding_box.x,
