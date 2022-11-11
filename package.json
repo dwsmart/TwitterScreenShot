@@ -21,7 +21,7 @@
         "imagemin": "^8.0.1",
         "imagemin-pngquant": "^9.0.2",
         "imagemin-webp": "^7.0.0",
-        "node-fetch": "^3.2.10",
+        "node-fetch": "^3.3.0",
         "puppeteer": "^19.2.2",
         "string-strip-html": "^11.6.20"
     }
