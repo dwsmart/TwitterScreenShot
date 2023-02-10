@@ -85,7 +85,7 @@ if (!theurl) {
         const frame = await tootframe.contentFrame();
 
         await frame.waitForSelector('div.activity-stream');
-
+        await new Promise(r => setTimeout(r, 2000));
         const toot = await frame.$('div.activity-stream');
         const bounding_box = await toot.boundingBox();
         await toot.screenshot({
