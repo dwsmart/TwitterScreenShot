@@ -21,8 +21,8 @@
         "imagemin": "^8.0.1",
         "imagemin-pngquant": "^9.0.2",
         "imagemin-webp": "^8.0.0",
-        "node-fetch": "^3.3.0",
-        "puppeteer": "^19.6.3",
-        "string-strip-html": "^13.1.0"
+        "node-fetch": "^3.3.1",
+        "puppeteer": "^19.8.3",
+        "string-strip-html": "^13.2.1"
     }
 }
