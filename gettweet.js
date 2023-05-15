@@ -46,7 +46,7 @@ if (!theurl) {
     console.log('url= is required');
 } else {
     (async() => {
-        const browser = await puppeteer.launch()
+        const browser = await puppeteer.launch({headless: 'new'})
         const page = await browser.newPage()
 
         await page.setViewport({
