@@ -79,7 +79,7 @@ if (!theurl) {
         page.setContent(theFile);
 
         await page.waitForSelector('iframe#twitter-widget-0');
-        await new Promise(r => setTimeout(r, 3000));
+        await new Promise(r => setTimeout(r, 5000));
         const tweetframe = await page.$('iframe#twitter-widget-0');
         const frame = await tweetframe.contentFrame();
         const tweet = await frame.$('div#app');
