@@ -1,6 +1,6 @@
 {
     "name": "twitterscreenshot",
-    "version": "0.2.2",
+    "version": "0.2.8",
     "description": "A Node CLI tool to make a screenshot of a tweet or mastodon toot and create a link",
     "main": "gettweet.js",
     "type": "module",
