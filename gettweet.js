@@ -87,10 +87,10 @@ if (!theurl) {
         await tweet.screenshot({
             path: `${imgDir}unopt/${fname}.png`,
             clip: {
-                x: bounding_box.x,
-                y: bounding_box.y,
-                width: Math.min(bounding_box.width, page.viewport().width),
-                height: Math.min(bounding_box.height, page.viewport().height),
+                x: bounding_box.x - 20,
+                y: bounding_box.y - 20,
+                width: Math.min(bounding_box.width, page.viewport().width) + 20,
+                height: Math.min(bounding_box.height, page.viewport().height) + 20,
             },
         });
         (async() => {
