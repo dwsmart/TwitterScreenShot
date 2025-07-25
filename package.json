@@ -1,6 +1,6 @@
 {
     "name": "twitterscreenshot",
-    "version": "0.2.2",
+    "version": "0.2.9",
     "description": "A Node CLI tool to make a screenshot of a tweet or mastodon toot and create a link",
     "main": "gettweet.js",
     "type": "module",
@@ -18,11 +18,11 @@
     },
     "homepage": "https://github.com/dwsmart/TwitterScreenShot#readme",
     "dependencies": {
-        "imagemin": "^8.0.1",
-        "imagemin-pngquant": "^9.0.2",
+        "imagemin": "^9.0.1",
+        "imagemin-pngquant": "^10.0.0",
         "imagemin-webp": "^8.0.0",
-        "node-fetch": "^3.3.1",
-        "puppeteer": "^20.2.0",
-        "string-strip-html": "^13.4.1"
+        "node-fetch": "^3.3.2",
+        "puppeteer": "^24.15.0",
+        "string-strip-html": "^13.4.13"
     }
 }

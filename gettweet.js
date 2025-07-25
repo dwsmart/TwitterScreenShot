@@ -46,7 +46,7 @@ if (!theurl) {
     console.log('url= is required');
 } else {
     (async() => {
-        const browser = await puppeteer.launch({headless: 'new'})
+        const browser = await puppeteer.launch()
         const page = await browser.newPage()
 
         await page.setViewport({
@@ -79,7 +79,7 @@ if (!theurl) {
         page.setContent(theFile);
 
         await page.waitForSelector('iframe#twitter-widget-0');
-        await new Promise(r => setTimeout(r, 3000));
+        await new Promise(r => setTimeout(r, 5000));
         const tweetframe = await page.$('iframe#twitter-widget-0');
         const frame = await tweetframe.contentFrame();
         const tweet = await frame.$('div#app');
@@ -87,10 +87,10 @@ if (!theurl) {
         await tweet.screenshot({
             path: `${imgDir}unopt/${fname}.png`,
             clip: {
-                x: bounding_box.x,
-                y: bounding_box.y,
-                width: Math.min(bounding_box.width, page.viewport().width),
-                height: Math.min(bounding_box.height, page.viewport().height),
+                x: bounding_box.x - 20,
+                y: bounding_box.y - 20,
+                width: Math.min(bounding_box.width, page.viewport().width) + 20,
+                height: Math.min(bounding_box.height, page.viewport().height) + 20,
             },
         });
         (async() => {
