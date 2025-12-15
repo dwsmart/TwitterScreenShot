@@ -43,7 +43,7 @@ if (!theurl) {
     console.log('url= is required');
 } else {
     (async () => {
-        const browser = await puppeteer.launch({headless: 'new'})
+        const browser = await puppeteer.launch({headless: 'new'});
         const page = await browser.newPage()
 
         await page.setViewport({
@@ -84,17 +84,18 @@ if (!theurl) {
         const tootframe = await page.$('iframe.mastodon-embed');
         const frame = await tootframe.contentFrame();
 
-        await frame.waitForSelector('div.activity-stream');
+        await frame.waitForSelector('div#mastodon-status');
         await new Promise(r => setTimeout(r, 2000));
-        const toot = await frame.$('div.activity-stream');
+        
+        const toot = await frame.$('div#mastodon-status');
         const bounding_box = await toot.boundingBox();
         await toot.screenshot({
             path: `${imgDir}unopt/${fname}.png`,
             clip: {
-                x: bounding_box.x,
-                y: bounding_box.y,
-                width: Math.min(bounding_box.width, page.viewport().width),
-                height: Math.min(bounding_box.height, page.viewport().height),
+                x: bounding_box.x - 20,
+                y: bounding_box.y - 20,
+                width: Math.min(bounding_box.width, page.viewport().width) + 20,
+                height: Math.min(bounding_box.height, page.viewport().height) + 20,
             },
         });
         (async () => {
