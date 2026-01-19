@@ -23,6 +23,6 @@
         "imagemin-webp": "^8.0.0",
         "node-fetch": "^3.3.2",
         "puppeteer": "^24.33.0",
-        "string-strip-html": "^13.5.0"
+        "string-strip-html": "^13.5.3"
     }
 }
